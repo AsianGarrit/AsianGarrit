@@ -107,16 +107,19 @@
             flex: 1; 
             overflow-y: auto; 
             padding: 10px; 
+            -webkit-overflow-scrolling: touch; /* Suavidad en móviles */
         }
         
         .cart-item {
             display: flex; align-items: center; border: 1px solid black; border-radius: 15px;
             padding: 8px; margin-bottom: 8px; gap: 8px; font-size: 13px;
+            background: white;
         }
         .cart-item-img { width: 35px; height: 35px; object-fit: contain; }
         
-        /* FOOTER DEL CARRITO CON SOMBRA */
+        /* FOOTER DEL CARRITO */
         .cart-footer { 
+            flex-shrink: 0;
             padding: 15px; 
             border-top: 1px solid #eee; 
             background: #fff;
@@ -150,7 +153,10 @@
             font-size: 14px;
         }
 
-        @media (max-width: 768px) { .side-cart { width: 90%; } }
+        @media (max-width: 768px) { 
+            .side-cart { width: 90%; } 
+            .cart-footer { padding-bottom: 30px; } /* Espacio extra para barras de navegación móvil */
+        }
     </style>
 </head>
 <body>
@@ -255,14 +261,14 @@
                         <div class="cart-item">
                             <img src="${p.img}" class="cart-item-img">
                             <div style="flex:1"><b>${p.nombre}</b><br>${p.cant} unid.</div>
-                            <div onclick="update(${p.id}, -${p.cant})" style="cursor:pointer; color:red;">🗑️</div>
+                            <div onclick="update(${p.id}, -${p.cant})" style="cursor:pointer; color:red; padding: 10px;">🗑️</div>
                         </div>`;
                 }
             });
             
-            // AGREGAMOS EL ESPACIO AL FINAL DEL CARRITO PARA EVITAR BLOQUEO DEL BOTÓN
             if(totalProductos > 0) {
-                cartItems.innerHTML += `<div style="height: 100px; width: 100%;"></div>`;
+                // SOLUCIÓN: Espaciador de 150px para liberar el área del botón en móviles
+                cartItems.innerHTML += `<div style="height: 150px; width: 100%; pointer-events: none;"></div>`;
                 cartBadge.innerText = totalProductos;
                 cartBadge.style.visibility = 'visible';
             } else {
@@ -270,7 +276,7 @@
             }
 
             document.getElementById('totalCart').innerText = "Total: $" + totalDinero.toLocaleString('es-CL');
-            if(totalDinero === 0) cartItems.innerHTML = '<p style="text-align:center; color:#999;">Vacío</p>';
+            if(totalDinero === 0) cartItems.innerHTML = '<p style="text-align:center; color:#999; margin-top: 20px;">Tu carrito está vacío</p>';
         }
 
         function update(id, delta) {
