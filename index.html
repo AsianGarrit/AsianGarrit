@@ -59,14 +59,14 @@
         /* CONTENIDO */
         .main-content { display: flex; flex: 1; overflow: hidden; position: relative; }
 
-        /* PRODUCTOS CON ESPACIO AL FINAL */
+        /* PRODUCTOS */
         .products-grid {
             flex: 1;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
             padding: 20px;
-            padding-bottom: 120px; /* Espacio para que el último producto se vea en celular */
+            padding-bottom: 120px; 
             overflow-y: auto;
         }
 
@@ -102,12 +102,11 @@
         .cart-title-area { padding: 15px; font-weight: bold; font-size: 20px; background: #f4f4f4; display: flex; justify-content: space-between; }
         .close-cart { cursor: pointer; color: var(--rosa-corporativo); font-size: 24px; }
         
-        /* LISTA DEL CARRITO CON ESPACIO AL FINAL */
+        /* LISTA DEL CARRITO */
         .cart-list { 
             flex: 1; 
             overflow-y: auto; 
             padding: 10px; 
-            padding-bottom: 80px; /* Espacio para que el último item no choque con el footer */
         }
         
         .cart-item {
@@ -116,7 +115,7 @@
         }
         .cart-item-img { width: 35px; height: 35px; object-fit: contain; }
         
-        /* FOOTER DEL CARRITO */
+        /* FOOTER DEL CARRITO CON SOMBRA */
         .cart-footer { 
             padding: 15px; 
             border-top: 1px solid #eee; 
@@ -125,6 +124,7 @@
             align-items: center;
             gap: 10px;
             justify-content: space-between;
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
             z-index: 10;
         }
         .total-box {
@@ -172,7 +172,7 @@
         <div class="categories-container">
             <div class="cat-pill active" onclick="filtrarCategoria('todos')">Todos</div>
             <div class="cat-pill" onclick="filtrarCategoria('Ramen')">Ramen 🍜</div>
-            <div class="cat-pill" onclick="filtrarCategoria('Topokkis')">Topokkis 🍢</div>
+            <div class="cat-pill" onclick="filtrarCategoria('Snacks')">Snacks 🍪</div>
             <div class="cat-pill" onclick="filtrarCategoria('Bebidas')">Bebidas 🥤</div>
             <div class="cat-pill" onclick="filtrarCategoria('Ramen Pote')">Ramen Pote 🍲</div>
         </div>
@@ -260,7 +260,9 @@
                 }
             });
             
+            // AGREGAMOS EL ESPACIO AL FINAL DEL CARRITO PARA EVITAR BLOQUEO DEL BOTÓN
             if(totalProductos > 0) {
+                cartItems.innerHTML += `<div style="height: 100px; width: 100%;"></div>`;
                 cartBadge.innerText = totalProductos;
                 cartBadge.style.visibility = 'visible';
             } else {
