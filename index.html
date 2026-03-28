@@ -26,21 +26,9 @@
         .cart-container-top { position: relative; cursor: pointer; display: flex; align-items: center; }
         .cart-icon-top { width: 40px; filter: invert(1); transition: 0.3s; }
         .cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: #ff0000;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid var(--rosa-corporativo);
-            visibility: hidden;
+            position: absolute; top: -5px; right: -5px; background-color: #ff0000; color: white;
+            font-size: 12px; font-weight: bold; width: 20px; height: 20px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; border: 2px solid var(--rosa-corporativo); visibility: hidden;
         }
 
         /* BUSCADOR Y CATEGORÍAS */
@@ -56,126 +44,48 @@
         }
         .cat-pill.active { background-color: var(--azul-borde); color: white; }
 
-        /* CONTENIDO PRINCIPAL */
-        .main-content { display: flex; flex: 1; overflow: hidden; position: relative; }
-
         /* PRODUCTOS */
+        .main-content { display: flex; flex: 1; overflow: hidden; position: relative; }
         .products-grid {
-            flex: 1;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            padding: 20px;
-            padding-bottom: 120px; 
-            overflow-y: auto;
+            flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px; padding: 20px; padding-bottom: 120px; overflow-y: auto;
         }
-
-        .product-card { 
-            background: white; border-radius: 12px; padding: 10px; 
-            text-align: center; border: 1px solid #eee; height: fit-content;
-        }
+        .product-card { background: white; border-radius: 12px; padding: 10px; text-align: center; border: 1px solid #eee; height: fit-content; }
         .prod-img { width: 100px; height: 100px; object-fit: contain; }
-        .prod-info { font-weight: bold; font-size: 14px; margin: 5px 0; }
-        .prod-price { color: var(--rosa-corporativo); font-weight: bold; font-size: 15px; margin-bottom: 8px; }
-        .btn-agregar-main {
-            background-color: var(--rosa-corporativo); color: white; border: none;
-            padding: 5px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;
-        }
+        .btn-agregar-main { background-color: var(--rosa-corporativo); color: white; border: none; padding: 5px 12px; border-radius: 15px; cursor: pointer; font-size: 12px; }
 
-        /* CARRITO LATERAL (FIXED) */
+        /* CARRITO (FIXED) */
         .side-cart {
-            position: fixed; 
-            right: -100%;
-            top: 0;
-            width: 33.33%; 
-            height: 100vh; 
-            background: white;
-            border-left: 2px solid var(--rosa-corporativo);
-            display: flex;
-            flex-direction: column;
-            transition: 0.4s ease-in-out;
-            z-index: 2000; 
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            position: fixed; right: -100%; top: 0; width: 33.33%; height: 100vh; 
+            background: white; border-left: 2px solid var(--rosa-corporativo);
+            display: flex; flex-direction: column; transition: 0.4s ease-in-out;
+            z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
         }
         .side-cart.open { right: 0; }
-
         .cart-title-area { padding: 15px; font-weight: bold; font-size: 20px; background: #f4f4f4; display: flex; justify-content: space-between; align-items: center; }
-        .close-cart { cursor: pointer; color: var(--rosa-corporativo); font-size: 24px; padding: 5px; }
-        
-        /* LISTA DEL CARRITO */
-        .cart-list { 
-            flex: 1; 
-            overflow-y: auto; 
-            padding: 10px; 
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .cart-item {
-            display: flex; align-items: center; border: 1px solid black; border-radius: 15px;
-            padding: 8px; margin-bottom: 8px; gap: 8px; font-size: 13px;
-        }
-        .cart-item-img { width: 35px; height: 35px; object-fit: contain; }
-        
-        /* FOOTER DEL CARRITO (ZONA DE BOTONES) */
+        .cart-list { flex: 1; overflow-y: auto; padding: 10px; }
+        .cart-item { display: flex; align-items: center; border: 1px solid black; border-radius: 15px; padding: 8px; margin-bottom: 8px; gap: 8px; font-size: 13px; }
+
+        /* PIE DEL CARRITO MODIFICADO */
         .cart-footer { 
-            flex-shrink: 0;
-            padding: 15px; 
-            border-top: 1px solid #eee; 
-            background: #fff;
-            display: flex;
-            flex-direction: column; /* Cambiado a columna para apilar mensaje y botones */
-            gap: 10px;
-            box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
-            z-index: 10;
+            flex-shrink: 0; padding: 15px; border-top: 1px solid #eee; background: #fff;
+            display: flex; flex-direction: column; gap: 12px; box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
         }
 
-        /* Mensaje de envíos */
-        .shipping-msg {
-            font-size: 12px;
-            color: #666;
-            text-align: center;
-            font-style: italic;
-            margin-bottom: 5px;
+        /* Mensaje promocional solicitado */
+        .promo-msg {
+            text-align: center; font-weight: bold; font-style: italic; font-size: 14px;
+            color: #333; line-height: 1.2; margin-top: 5px;
         }
 
-        /* Contenedor para botones en línea */
-        .cart-buttons-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            justify-content: space-between;
-        }
+        .cart-buttons-row { display: flex; align-items: center; gap: 10px; width: 100%; }
+        .total-box { flex: 1; border: 2px solid var(--azul-borde); border-radius: 8px; padding: 10px 5px; font-weight: bold; text-align: center; color: var(--azul-borde); }
+        .btn-order { flex: 1.5; background: #25d366; color: white; border: none; padding: 12px 5px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
-        .total-box {
-            flex: 1;
-            border: 2px solid var(--azul-borde);
-            border-radius: 8px;
-            padding: 10px 5px;
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-            color: var(--azul-borde);
-            white-space: nowrap;
-        }
-        .btn-order { 
-            flex: 1.5;
-            background: #25d366; 
-            color: white; 
-            border: none; 
-            padding: 12px 5px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        /* AJUSTE PARA CELULARES */
         @media (max-width: 768px) { 
             .side-cart { width: 100%; } 
-            /* Aumentamos mucho el padding inferior para "subir" los botones */
-            .cart-footer { padding-bottom: 80px; } 
-            .shipping-msg { font-size: 11px; }
+            .cart-footer { padding-bottom: 90px; } /* Ajuste de altura para celulares */
+            .promo-msg { font-size: 13px; }
         }
     </style>
 </head>
@@ -194,7 +104,6 @@
 
     <div class="search-section">
         <input type="text" id="searchInput" class="search-bar" placeholder="Encuentra lo que buscas..." onkeyup="filtrarPorNombre()">
-        
         <div class="categories-container">
             <div class="cat-pill active" onclick="filtrarCategoria('todos')">Todos</div>
             <div class="cat-pill" onclick="filtrarCategoria('Ramen')">Ramen 🍜</div>
@@ -211,15 +120,16 @@
     <aside class="side-cart" id="sideCart">
         <div class="cart-title-area">
             Mi Pedido
-            <span class="close-cart" onclick="toggleCart()">✕</span>
+            <span style="cursor:pointer; color:var(--rosa-corporativo);" onclick="toggleCart()">✕</span>
         </div>
         <div id="cartItems" class="cart-list"></div>
         <div class="cart-footer">
-            <div class="shipping-msg">Envíos a todo Chile, los mejores ramen al mejor precio</div>
-            
             <div class="cart-buttons-row">
                 <button class="btn-order" onclick="enviarWsp()">Encargar pedido 🛒</button>
                 <div id="totalCart" class="total-box">Total: $0</div>
+            </div>
+            <div class="promo-msg">
+                "Envíos a todo Chile,<br>los mejores ramen al mejor precio"
             </div>
         </div>
     </aside>
@@ -239,21 +149,9 @@
         let catActual = 'todos';
         let textoBusqueda = '';
 
-        function toggleCart() {
-            document.getElementById('sideCart').classList.toggle('open');
-        }
-
-        function filtrarPorNombre() {
-            textoBusqueda = document.getElementById('searchInput').value.toLowerCase();
-            render();
-        }
-
-        function filtrarCategoria(c) {
-            catActual = c;
-            document.querySelectorAll('.cat-pill').forEach(pill => pill.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            render();
-        }
+        function toggleCart() { document.getElementById('sideCart').classList.toggle('open'); }
+        function filtrarPorNombre() { textoBusqueda = document.getElementById('searchInput').value.toLowerCase(); render(); }
+        function filtrarCategoria(c) { catActual = c; document.querySelectorAll('.cat-pill').forEach(pill => pill.classList.remove('active')); event.currentTarget.classList.add('active'); render(); }
 
         function render() {
             const grid = document.getElementById('grid');
@@ -263,41 +161,28 @@
             let totalDinero = 0; let totalProductos = 0;
 
             inventario.forEach(p => {
-                const coincideCat = (catActual === 'todos' || p.cat === catActual);
-                const coincideNombre = p.nombre.toLowerCase().includes(textoBusqueda);
-
-                if (coincideCat && coincideNombre) {
-                    grid.innerHTML += `
-                        <div class="product-card">
-                            <img src="${p.img}" class="prod-img">
-                            <div class="prod-info">${p.nombre}</div>
-                            <div class="prod-price">$${p.precio.toLocaleString('es-CL')}</div>
-                            <button class="btn-agregar-main" onclick="update(${p.id}, 1)">
-                                ${p.cant > 0 ? 'Añadido ('+p.cant+')' : 'Agregar'}
-                            </button>
-                        </div>`;
+                if ((catActual === 'todos' || p.cat === catActual) && p.nombre.toLowerCase().includes(textoBusqueda)) {
+                    grid.innerHTML += `<div class="product-card">
+                        <img src="${p.img}" class="prod-img">
+                        <div style="font-weight:bold; font-size:14px; margin:5px 0;">${p.nombre}</div>
+                        <div style="color:var(--rosa-corporativo); font-weight:bold; margin-bottom:8px;">$${p.precio.toLocaleString('es-CL')}</div>
+                        <button class="btn-agregar-main" onclick="update(${p.id}, 1)">${p.cant > 0 ? 'Añadido ('+p.cant+')' : 'Agregar'}</button>
+                    </div>`;
                 }
-
                 if(p.cant > 0) {
-                    totalDinero += (p.precio * p.cant);
-                    totalProductos += p.cant;
-                    cartItems.innerHTML += `
-                        <div class="cart-item">
-                            <img src="${p.img}" class="cart-item-img">
-                            <div style="flex:1"><b>${p.nombre}</b><br>${p.cant} unid.</div>
-                            <div onclick="update(${p.id}, -${p.cant})" style="cursor:pointer; color:red; padding:10px;">🗑️</div>
-                        </div>`;
+                    totalDinero += (p.precio * p.cant); totalProductos += p.cant;
+                    cartItems.innerHTML += `<div class="cart-item">
+                        <img src="${p.img}" style="width:35px; height:35px; object-fit:contain;">
+                        <div style="flex:1"><b>${p.nombre}</b><br>${p.cant} unid.</div>
+                        <div onclick="update(${p.id}, -${p.cant})" style="cursor:pointer; color:red; padding:10px;">🗑️</div>
+                    </div>`;
                 }
             });
             
             if(totalProductos > 0) {
-                // Espaciador aumentado a 180px para dar aire al nuevo footer más alto
                 cartItems.innerHTML += `<div style="height: 180px; width: 100%; pointer-events: none;"></div>`;
-                cartBadge.innerText = totalProductos;
-                cartBadge.style.visibility = 'visible';
-            } else {
-                cartBadge.style.visibility = 'hidden';
-            }
+                cartBadge.innerText = totalProductos; cartBadge.style.visibility = 'visible';
+            } else { cartBadge.style.visibility = 'hidden'; }
 
             document.getElementById('totalCart').innerText = "Total: $" + totalDinero.toLocaleString('es-CL');
             if(totalDinero === 0) cartItems.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">Vacío</p>';
@@ -312,9 +197,7 @@
         function enviarWsp() {
             let pedido = inventario.filter(p => p.cant > 0);
             if(pedido.length === 0) return alert("Carrito vacío");
-            let msg = "¡Hola AsianGarrit! 🍜 Quiero encargar:\n\n" + 
-                      pedido.map(p => `- ${p.cant}x ${p.nombre} ($${(p.precio * p.cant).toLocaleString('es-CL')})`).join("\n") +
-                      "\n\nTotal: " + document.getElementById('totalCart').innerText;
+            let msg = "¡Hola AsianGarrit! 🍜 Quiero encargar:\n\n" + pedido.map(p => `- ${p.cant}x ${p.nombre}`).join("\n") + "\n\nTotal: " + document.getElementById('totalCart').innerText;
             window.open(`https://wa.me/56958420744?text=${encodeURIComponent(msg)}`);
         }
 
