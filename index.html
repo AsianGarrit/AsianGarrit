@@ -23,7 +23,6 @@
         .logo-img { width: 60px; height: 60px; border-radius: 50%; background: white; object-fit: cover; }
         .brand-name { font-size: 32px; font-family: serif; }
         
-        /* CONTENEDOR ICONO CARRITO + CONTADOR */
         .cart-container-top { position: relative; cursor: pointer; display: flex; align-items: center; }
         .cart-icon-top { width: 40px; filter: invert(1); transition: 0.3s; }
         .cart-badge {
@@ -41,7 +40,7 @@
             justify-content: center;
             align-items: center;
             border: 2px solid var(--rosa-corporativo);
-            visibility: hidden; /* Se muestra solo si hay productos */
+            visibility: hidden;
         }
 
         /* BUSCADOR Y CATEGORÍAS */
@@ -60,7 +59,7 @@
         /* CONTENIDO */
         .main-content { display: flex; flex: 1; overflow: hidden; position: relative; }
 
-        /* PRODUCTOS COMPACTOS */
+        /* PRODUCTOS */
         .products-grid {
             flex: 1;
             display: grid;
@@ -109,10 +108,40 @@
         }
         .cart-item-img { width: 35px; height: 35px; object-fit: contain; }
         
-        .cart-footer { padding: 15px; border-top: 1px solid #eee; text-align: center; background: #fff; }
-        .btn-order { background: #25d366; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        /* FOOTER DEL CARRITO ACTUALIZADO (BOTÓN + TOTAL) */
+        .cart-footer { 
+            padding: 15px; 
+            border-top: 1px solid #eee; 
+            background: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        .total-box {
+            flex: 1;
+            border: 2px solid var(--azul-borde);
+            border-radius: 8px;
+            padding: 10px 5px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            color: var(--azul-borde);
+            white-space: nowrap;
+        }
+        .btn-order { 
+            flex: 1.5;
+            background: #25d366; 
+            color: white; 
+            border: none; 
+            padding: 12px 5px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 14px;
+        }
 
-        @media (max-width: 768px) { .side-cart { width: 85%; } }
+        @media (max-width: 768px) { .side-cart { width: 90%; } }
     </style>
 </head>
 <body>
@@ -134,7 +163,7 @@
         <div class="categories-container">
             <div class="cat-pill active" onclick="filtrarCategoria('todos')">Todos</div>
             <div class="cat-pill" onclick="filtrarCategoria('Ramen')">Ramen 🍜</div>
-            <div class="cat-pill" onclick="filtrarCategoria('Snacks')">Topokkis 🍢</div>
+            <div class="cat-pill" onclick="filtrarCategoria('Topokkis')">Topokkis 🍢</div>
             <div class="cat-pill" onclick="filtrarCategoria('Bebidas')">Bebidas 🥤</div>
             <div class="cat-pill" onclick="filtrarCategoria('Ramen Pote')">Ramen Pote 🍲</div>
         </div>
@@ -150,8 +179,8 @@
             </div>
             <div id="cartItems" class="cart-list"></div>
             <div class="cart-footer">
-                <div id="totalCart" style="font-weight:bold; margin-bottom:10px; font-size:18px;">Total: $0</div>
                 <button class="btn-order" onclick="enviarWsp()">Encargar pedido 🛒</button>
+                <div id="totalCart" class="total-box">Total: $0</div>
             </div>
         </aside>
     </div>
@@ -191,12 +220,8 @@
             const grid = document.getElementById('grid');
             const cartItems = document.getElementById('cartItems');
             const cartBadge = document.getElementById('cartCount');
-            
-            grid.innerHTML = ""; 
-            cartItems.innerHTML = "";
-            
-            let totalDinero = 0;
-            let totalProductos = 0;
+            grid.innerHTML = ""; cartItems.innerHTML = "";
+            let totalDinero = 0; let totalProductos = 0;
 
             inventario.forEach(p => {
                 const coincideCat = (catActual === 'todos' || p.cat === catActual);
@@ -216,7 +241,7 @@
 
                 if(p.cant > 0) {
                     totalDinero += (p.precio * p.cant);
-                    totalProductos += p.cant; // Sumamos para el contador rojo
+                    totalProductos += p.cant;
                     cartItems.innerHTML += `
                         <div class="cart-item">
                             <img src="${p.img}" class="cart-item-img">
@@ -226,7 +251,6 @@
                 }
             });
             
-            // Actualizar contador rojo
             if(totalProductos > 0) {
                 cartBadge.innerText = totalProductos;
                 cartBadge.style.visibility = 'visible';
