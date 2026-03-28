@@ -82,19 +82,19 @@
             padding: 5px 12px; border-radius: 15px; cursor: pointer; font-size: 12px;
         }
 
-        /* CARRITO LATERAL (FIXED PARA TAPAR TODO) */
+        /* CARRITO LATERAL (FIXED) */
         .side-cart {
-            position: fixed; /* Cambiado a fixed para que flote sobre toda la pantalla */
+            position: fixed; 
             right: -100%;
             top: 0;
             width: 33.33%; 
-            height: 100vh; /* Ocupa el alto total de la ventana */
+            height: 100vh; 
             background: white;
             border-left: 2px solid var(--rosa-corporativo);
             display: flex;
             flex-direction: column;
             transition: 0.4s ease-in-out;
-            z-index: 2000; /* Prioridad alta para tapar header y buscador */
+            z-index: 2000; 
             box-shadow: -5px 0 15px rgba(0,0,0,0.1);
         }
         .side-cart.open { right: 0; }
@@ -116,19 +116,37 @@
         }
         .cart-item-img { width: 35px; height: 35px; object-fit: contain; }
         
-        /* FOOTER DEL CARRITO */
+        /* FOOTER DEL CARRITO (ZONA DE BOTONES) */
         .cart-footer { 
             flex-shrink: 0;
             padding: 15px; 
             border-top: 1px solid #eee; 
             background: #fff;
             display: flex;
-            align-items: center;
+            flex-direction: column; /* Cambiado a columna para apilar mensaje y botones */
             gap: 10px;
-            justify-content: space-between;
             box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
             z-index: 10;
         }
+
+        /* Mensaje de envíos */
+        .shipping-msg {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        /* Contenedor para botones en línea */
+        .cart-buttons-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
         .total-box {
             flex: 1;
             border: 2px solid var(--azul-borde);
@@ -154,8 +172,10 @@
 
         /* AJUSTE PARA CELULARES */
         @media (max-width: 768px) { 
-            .side-cart { width: 100%; } /* Cubre el ancho total en móvil */
-            .cart-footer { padding-bottom: 30px; } /* Espacio extra para barras del navegador móvil */
+            .side-cart { width: 100%; } 
+            /* Aumentamos mucho el padding inferior para "subir" los botones */
+            .cart-footer { padding-bottom: 80px; } 
+            .shipping-msg { font-size: 11px; }
         }
     </style>
 </head>
@@ -195,8 +215,12 @@
         </div>
         <div id="cartItems" class="cart-list"></div>
         <div class="cart-footer">
-            <button class="btn-order" onclick="enviarWsp()">Encargar pedido 🛒</button>
-            <div id="totalCart" class="total-box">Total: $0</div>
+            <div class="shipping-msg">Envíos a todo Chile, los mejores ramen al mejor precio</div>
+            
+            <div class="cart-buttons-row">
+                <button class="btn-order" onclick="enviarWsp()">Encargar pedido 🛒</button>
+                <div id="totalCart" class="total-box">Total: $0</div>
+            </div>
         </div>
     </aside>
 
@@ -267,8 +291,8 @@
             });
             
             if(totalProductos > 0) {
-                // Espaciador para asegurar que el último item sea visible sobre los botones
-                cartItems.innerHTML += `<div style="height: 150px; width: 100%; pointer-events: none;"></div>`;
+                // Espaciador aumentado a 180px para dar aire al nuevo footer más alto
+                cartItems.innerHTML += `<div style="height: 180px; width: 100%; pointer-events: none;"></div>`;
                 cartBadge.innerText = totalProductos;
                 cartBadge.style.visibility = 'visible';
             } else {
